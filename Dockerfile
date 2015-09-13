@@ -1,5 +1,5 @@
 FROM linuxserver/baseimage
-MAINTAINER Gonzalo Peci <weedv2@outlook.com>
+MAINTAINER Orkun Sensebat <ihate88@gmail.com>
 
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
@@ -13,7 +13,7 @@ RUN add-apt-repository ppa:deluge-team/ppa > /dev/null && \
 
 #Ports and Volumes
 VOLUME /config
-VOLUME /torrents
+VOLUME /downloads
 # expose port for http
 EXPOSE 8112
 # expose port for deluge daemon
