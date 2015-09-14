@@ -40,10 +40,10 @@ docker create \
 
 This build does not try to change unnecessary settings. The only changes made to the default configuration are
 
-* Instead of using `~/Downloads` as the default option, the build uses `/downloads` inside the container, instead.
-* Remote connections are enabled by default as container and host have different NICs and addresses.
+* Instead of using `~/Downloads` as the default option, the build uses `/downloads` inside the container.
+* Remote connections are enabled by default, as container and host have different NICs and addresses.
 
-To set up default credentials you can use the DELUGE_USER and DELUGE_PASSWORD environment variables.
+To set up default credentials you can use the `DELUGE_USER` and `DELUGE_PASSWORD` environment variables.
 
 ### User / Group Identifiers
 
