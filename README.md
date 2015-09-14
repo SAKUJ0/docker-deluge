@@ -1,6 +1,6 @@
 ![](https://avatars2.githubusercontent.com/u/6733935?v=3&s=200)
 
-# pecigonzalo/deluge
+# sensebat/deluge
 
 [deluge](http://deluge-torrent.org/) Deluge is a lightweight, Free Software, cross-platform BitTorrent client.
 
@@ -14,21 +14,36 @@
 ```
 docker create \
   --name deluge \
-  --net=host \
   -e PUID=<UID> -e PGID=<GID> \
-  -v </path/to/your/torrents>:/torrents \
+  -p 58946:58946 -p 58946:58946/udp \
+  -p 58846:58846 \
+  -p 8112:8112 \
+  -v </path/to/your/downloads>:/downloads \
   -v </path/to/deluge/config>:/config \
   -v /etc/localtime:/etc/localtime:ro \
-  pecigonzalo/deluge
+  sensebat/deluge
 ```
 
 **Parameters**
 
-* `--net=host` - Shares host networking with container, **required**.
+* `-p 58946` - the tcp and udp ports for BitTorrent
+* `-p 58846` - the port for the daemon
+* `-p 8112` - the port for the web interface
 * `-v /config` - deluge configs
-* `-v /torrents` - torrent download directory
-* `-e PGID` for for GroupID - see below for explanation
-* `-e PUID` for for UserID - see below for explanation
+* `-v /downloads` - download directory
+* `-e PGID` for GroupID - see below for explanation
+* `-e PUID` for UserID - see below for explanation
+* `-e DELUGE_USER` for remote authentication - see below for explanation
+* `-e DELUGE_PASSWORD` for remote authentication - see below for explanation
+
+## Default Settings
+
+This build does not try to change unnecessary settings. The only changes made to the default configuration are
+
+* Instead of using `~/Downloads` as the default option, the build uses `/downloads` inside the container, instead.
+* Remote connections are enabled by default as container and host have different NICs and addresses.
+
+To set up default credentials you can use the DELUGE_USER and DELUGE_PASSWORD environment variables.
 
 ### User / Group Identifiers
 
@@ -43,6 +58,7 @@ Part of what makes this containers work so well is by allowing you to specify yo
 
 **Credits**
 
+* sensebat <ihate88@gmail.com>
 * pecigonzalo <weedv2@outlook.com>
 * lonix <lonixx@gmail.com>
 * [LinuxServer.io](http://linuxserver.io)
