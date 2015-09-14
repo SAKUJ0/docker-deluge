@@ -11,6 +11,9 @@ RUN add-apt-repository ppa:deluge-team/ppa > /dev/null && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Add default configuration
+ADD core.conf /core.conf
+
 #Ports and Volumes
 VOLUME /config
 VOLUME /downloads
